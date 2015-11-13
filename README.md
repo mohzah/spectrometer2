@@ -1,8 +1,11 @@
 # spectrometer2
 
 $ pip install gitpython
+
 $ pip install flask
+
 $ cd spectrometer2/
+
 $ python webapp.py
 
 open a browswer
