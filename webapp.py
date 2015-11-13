@@ -1,5 +1,6 @@
 from flask import Flask, json, jsonify, Response
-import githelpers
+# todo: http://flask.pocoo.org/snippets/83/
+from githelpers import GitHandler
 
 app = Flask(__name__)
 
@@ -10,7 +11,8 @@ def hello_world():
 
 @app.route('/git/<module_name>')
 def git_stat(module_name):
-    stats = githelpers.commits_stat(module_name)
+    git_handle = GitHandler(module_name)
+    stats = git_handle.get_commits_stat()
     # return Response(response=json.dumps(stats,indent=2, separators=(',', ': ')), status=200, mimetype='application/json')
     return jsonify(stats)
 
