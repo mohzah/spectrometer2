@@ -2,8 +2,8 @@
 
 ### Installation
 ```
-$ pip install -r requirements.txt
 $ cd spectrometer2/
+$ pip install -r requirements.txt
 $ python webapp.py
 ```
 
