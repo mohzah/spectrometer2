@@ -1,5 +1,6 @@
 from git import Repo
 import time
+import yaml
 
 def get_modules_repo(moduel_name):
     """
@@ -10,13 +11,14 @@ def get_modules_repo(moduel_name):
     """
     bare = True
     if moduel_name == 'test':
-        # directed to a git repository on the machine
-        repo_address = './.'
         bare = False
+    with open('./repositories.yaml') as file:
+        repositories = yaml.load(file)
+    repo_address = repositories[moduel_name]['repo']
     return Repo.init(repo_address, bare=bare)
 
-stats = {'commits':[]}
 def commits_stat(module_name):
+    stats = {'commits':[]}
     repo = get_modules_repo(module_name)
     for commit in repo.head.commit.iter_parents():
         commit_dic={
