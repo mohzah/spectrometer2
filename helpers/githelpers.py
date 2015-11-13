@@ -1,4 +1,4 @@
-# Copyright (c) 2015,  Mohammed Zahraee
+# Copyright (c) 2015,  Mohammed Hassan Zahraee
 
 # All rights reserved.
 
@@ -30,7 +30,7 @@
 
 """
 
-@authors: Mohammed Zahraee
+@authors: Mohammed Hassan Zahraee
 @status: Development
 @version: 1.0
 
