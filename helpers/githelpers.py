@@ -57,7 +57,7 @@ class GitHandler:
         # todo: remove test and bare
         if moduel_name == 'test':
             bare = False
-        with open('./repositories.yaml') as file:
+        with open('./etc/repositories.yaml') as file:
             repositories = yaml.load(file)
         repo_address = repositories[moduel_name]['repo']
         return Repo.init(repo_address, bare=bare)
