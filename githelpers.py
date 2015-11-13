@@ -15,17 +15,18 @@ def get_modules_repo(moduel_name):
         bare = False
     return Repo.init(repo_address, bare=bare)
 
-stats = []
+stats = {'commits':[]}
 def commits_stat(module_name):
     repo = get_modules_repo(module_name)
     for commit in repo.head.commit.iter_parents():
         commit_dic={
+            'hash':commit.hexsha,
             'lines':commit.stats.total,
             'time':time.strftime("%d %b %Y %H:%M", time.gmtime(commit.committed_date)),
             'commiter':commit.author.name,
             'email':commit.author.email
         }
-        stats.append(commit_dic)
+        stats['commits'].append(commit_dic)
     return stats
 
 

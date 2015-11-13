@@ -1,4 +1,4 @@
-from flask import Flask, json
+from flask import Flask, json, jsonify, Response
 import githelpers
 
 app = Flask(__name__)
@@ -11,8 +11,8 @@ def hello_world():
 @app.route('/git/<module_name>')
 def git_stat(module_name):
     stats = githelpers.commits_stat(module_name)
-    return json.dumps(stats)
-
+    # return Response(response=json.dumps(stats,indent=2, separators=(',', ': ')), status=200, mimetype='application/json')
+    return jsonify(stats)
 
 @app.route('/gerrit/<module_name>')
 def gerrit_stat():
