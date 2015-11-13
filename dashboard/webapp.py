@@ -1,6 +1,9 @@
+import os, sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
 from flask import Flask, json, jsonify, Response
 # todo: http://flask.pocoo.org/snippets/83/
-from githelpers import GitHandler
+from helpers.githelpers import GitHandler
 
 app = Flask(__name__)
 

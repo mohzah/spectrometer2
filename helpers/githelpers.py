@@ -23,6 +23,7 @@ class GitHandler:
         return Repo.init(repo_address, bare=bare)
 
     def get_commits_stat(self):
+        # todo: removing merging commits (more than 1 parent)
         stats = {'commits':[]}
         for commit in self.repo.head.commit.iter_parents():
             commit_dic={
