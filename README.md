@@ -11,5 +11,5 @@ open a browswer
 http://127.0.0.1:5000/git/test
 must show commits log.
 
-### Installation
+### Contribuition
 Style guide: http://www.pocoo.org/internal/styleguide/#styleguide
