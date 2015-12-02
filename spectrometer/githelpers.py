@@ -34,34 +34,48 @@
 @status: Development
 @version: 1.0
 
-webapp.py: Web App
+githelpers.py: Git Helper
 
 """
 
-
-import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-from flask import Flask, json, jsonify, Response
-# todo: http://flask.pocoo.org/snippets/83/
-from helpers.githelpers import GitHandler
-
-app = Flask(__name__)
+from git import Repo
+import time
+import yaml
+from dashboard import app
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+class GitHandler:
+    def __init__(self, moduel_name):
+        self.repo = self.get_modules_repo(moduel_name)
 
-@app.route('/git/<module_name>')
-def git_stat(module_name):
-    git_handle = GitHandler(module_name)
-    stats = git_handle.get_commits_stat()
-    # return Response(response=json.dumps(stats,indent=2, separators=(',', ': ')), status=200, mimetype='application/json')
-    return jsonify(stats)
+    def get_modules_repo(self, moduel_name):
+        """
+            finds a modules repository address from repositories.json file
+            and returns a Repo object for the repository
+            @:param module's name
+            @:return repository object for the module
+        """
+        bare = True
+        # todo: remove test and bare
+        if moduel_name == 'test':
+            bare = False
+        with open(app.config['REPOSITORY_ADDRESSES']) as file:
+            repositories = yaml.load(file)
+        repo_address = repositories[moduel_name]['repo']
+        return Repo.init(repo_address, bare=bare)
 
-@app.route('/gerrit/<module_name>')
-def gerrit_stat():
-    return "Not implemented"
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    def get_commits_stat(self):
+        # todo: removing merging commits (more than 1 parent)
+        stats = {'commits': []}
+        for commit in self.repo.head.commit.iter_parents():
+            commit_dic = {
+                'hash': commit.hexsha,
+                'lines': commit.stats.total,
+                # UTC time
+                'time': time.strftime("%d %b %Y %H:%M",
+                                      time.gmtime(commit.committed_date)),
+                'commiter': commit.author.name,
+                'email': commit.author.email
+            }
+            stats['commits'].append(commit_dic)
+        return stats
