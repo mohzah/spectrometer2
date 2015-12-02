@@ -4,7 +4,7 @@
 ```
 $ cd spectrometer2/
 $ pip install -r requirements.txt
-$ python dashboard/webapp.py
+$ python run.py
 ```
 
 open a browswer
