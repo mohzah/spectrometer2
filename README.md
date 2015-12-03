@@ -26,7 +26,7 @@ Now `http://127.0.0.1:5000/git/modulename` will return repository log of added r
 
 ### Contribuition
 Style guide:  
-PEP8
+PEP8  
 https://code.google.com/p/soc/wiki/PythonStyleGuide  
 http://www.pocoo.org/internal/styleguide/#styleguide
 
