@@ -34,5 +34,6 @@ Add new files to list of files checked for PEP8 conformance in test/test_pep8.py
 
 ### Test
 ```
+$ cd spectrometer2/
 $ py.test tests
 ```
