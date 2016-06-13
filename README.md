@@ -1,5 +1,7 @@
 # spectrometer2
 
+Project moved to https://git.opendaylight.org/gerrit/#/admin/projects/spectrometer
+
 ### Installation
 ```
 $ cd spectrometer2/
